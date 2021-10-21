@@ -10,3 +10,4 @@ import Foundation
 struct K {
     static let testConstant = "Test"
 }
+

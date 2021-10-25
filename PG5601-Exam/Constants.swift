@@ -8,6 +8,7 @@
 import Foundation
 
 struct K {
-    static let testConstant = "Test"
+    static let personListCellIdentifier = "PersonReusableCell"
+    static let personListCellName = "PersonCell"
 }
 

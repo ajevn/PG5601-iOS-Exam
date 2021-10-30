@@ -79,5 +79,7 @@ extension PersonListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedRowIndex = indexPath.row
         self.performSegue(withIdentifier: "personInfoSegue", sender: self)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

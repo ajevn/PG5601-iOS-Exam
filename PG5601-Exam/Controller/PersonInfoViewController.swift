@@ -13,7 +13,7 @@ class PersonInfoViewController: UIViewController {
     
     var selectedPerson: PersonEntity?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let persistenceController = PersistenceController()
+    let persistenceController = PersistenceManager()
     
     @IBOutlet weak var personImage: UIImageView!
     @IBOutlet weak var firstNameLabel: UILabel!

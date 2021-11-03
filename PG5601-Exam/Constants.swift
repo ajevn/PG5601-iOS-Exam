@@ -10,6 +10,7 @@ import Foundation
 struct K {
     static let personListCellIdentifier = "PersonReusableCell"
     static let personListCellName = "PersonCell"
+    static let personApiSeedKey = "PersonApiSeedKey"
     static let personApiBaseUrl = "https://randomuser.me/api/"
     static let personApiURLExcludedFields = "exc=login&exc=registered"
     static let personApiURLNationality = "nat=no"

@@ -6,10 +6,13 @@
 //
 
 import Foundation
+import Logging
 
-class Manager {
+
+class NetworkManager {
     //Add variables for specific delegates here thus making them accessible to child classes of Manager
     var personManagerDelegate: PersonManagerDelegate?
+    let logger = Logger(label: "NetworkManager")
     
     func fetchData(with url: URLRequest) {
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -17,6 +20,7 @@ class Manager {
                 self.personManagerDelegate?.didFailWithError(error: error!)
             }
             if let safeData = data {
+                self.logger.info("Successfully fetched data from API")
                 self.personManagerDelegate?.didFetchPersons(personArray: self.parseJSON(from: safeData)!)
             }
         }

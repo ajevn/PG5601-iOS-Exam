@@ -12,7 +12,7 @@ protocol PersonManagerDelegate {
     func didFailWithError(error: Error)
 }
 
-class PersonManager: Manager {
+class PersonManager: NetworkManager {
 
 
     override init() {
@@ -22,7 +22,8 @@ class PersonManager: Manager {
     func fetchData(withBaseURL baseURL: String,withURLSeed urlSeed: String,withURLNationality urlNationality: String,withURLExcludedFields urlExcludedFields: String,withResultCount resultCount: String) {
         var request = URLRequest(url: URL(string: "\(baseURL)?results=\(resultCount)&\(urlNationality)&\(urlExcludedFields)&\(urlSeed)")!)
         request.setValue("Content-Type", forHTTPHeaderField: "application/json")
-        
+        print("Attempting to fetch data from API using seed: \(urlSeed)")
+
         fetchData(with: request)
     }
 }

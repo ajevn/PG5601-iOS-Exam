@@ -7,15 +7,17 @@
 
 import Foundation
 import CoreData
+import Logging
 
-class PersistenceController {
+class PersistenceManager {
+    let logger = Logger(label: "PersistenceManager")
     
     func saveContext(withContext context: NSManagedObjectContext) {
         do {
             try context.save()
-            print("Successfully saved context.")
+            logger.info("Successfully saved context.")
         } catch {
-            print("Error saving context: \(error)")
+            logger.error("Error saving context: \(error)")
         }
     }
     
@@ -25,9 +27,9 @@ class PersistenceController {
 
         do {
             try context.execute(deleteRequest)
-            print("Successfully deleted context.")
+            logger.info("Successfully deleted context.")
         } catch let error as NSError {
-            print("Error deleting context: \(error)")
+            logger.error("Error deleting context: \(error)")
         }
     }
     
@@ -40,10 +42,10 @@ class PersistenceController {
         let fetchRequest: NSFetchRequest<PersonEntity> = PersonEntity.fetchRequest()
         do {
             let personArray = try context.fetch(fetchRequest)
-            print("Successfully loaded context.")
+            logger.info("Successfully loaded context.")
             return personArray
         } catch let error as NSError {
-            print("Error loading context: \(error)")
+            logger.error("Error loading context: \(error)")
         }
         return nil
     }

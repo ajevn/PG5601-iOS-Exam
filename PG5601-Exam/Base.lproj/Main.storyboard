@@ -67,14 +67,44 @@
                     <view key="view" contentMode="scaleToFill" id="6YW-W2-E3c">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="zAR-YG-lhf">
+                                <rect key="frame" x="10" y="128" width="394" height="34"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="API-Seed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1E2-2q-3N2">
+                                        <rect key="frame" x="0.0" y="0.0" width="193" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xzA-Yd-Kne">
+                                        <rect key="frame" x="201" y="0.0" width="193" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="aLL-et-9dd"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="zAR-YG-lhf" firstAttribute="leading" secondItem="aLL-et-9dd" secondAttribute="leading" constant="10" id="Vbd-zK-sDO"/>
+                            <constraint firstItem="zAR-YG-lhf" firstAttribute="top" secondItem="aLL-et-9dd" secondAttribute="top" constant="40" id="mLc-Km-4ZA"/>
+                            <constraint firstItem="aLL-et-9dd" firstAttribute="trailing" secondItem="zAR-YG-lhf" secondAttribute="trailing" constant="10" id="zHS-QK-5A2"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" id="IYW-Q7-bQf"/>
                     <navigationItem key="navigationItem" title="Settings" id="YFI-hW-wZn">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="znu-Rb-NuU"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="znu-Rb-NuU">
+                            <connections>
+                                <action selector="didPressSave:" destination="pX5-YI-yTe" id="F8V-lU-ORm"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
+                    <connections>
+                        <outlet property="apiSeedTextField" destination="xzA-Yd-Kne" id="Hg0-Ml-LtO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gnx-TD-xPa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -610,7 +640,7 @@
         <!--Kontakter-->
         <scene sceneID="YCS-OR-hnm">
             <objects>
-                <navigationController title="Kontakter" automaticallyAdjustsScrollViewInsets="NO" id="PUa-2u-5da" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navController1" title="Kontakter" automaticallyAdjustsScrollViewInsets="NO" id="PUa-2u-5da" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Contacts" id="2yb-1M-54b"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>

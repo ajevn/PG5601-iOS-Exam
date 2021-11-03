@@ -12,10 +12,11 @@ import CoreData
 class PersonListViewController: UIViewController {
     
     var personsArray = [PersonEntity]()
-    let persistenceController = PersistenceController()
+    let persistenceController = PersistenceManager()
     let personManager = PersonManager()
     var selectedRowIndex = 0
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     
     @IBOutlet weak var personTableView: UITableView!
     override func viewDidLoad() {
@@ -51,8 +52,14 @@ class PersonListViewController: UIViewController {
                     }
                 }
             } else {
+                let urlSeed: String
+                if let safeUrlSeed = UserDefaults.standard.string(forKey: K.personApiSeedKey) {
+                    urlSeed = safeUrlSeed
+                } else {
+                    urlSeed = "ios"
+                }
                 personManager.fetchData(withBaseURL: K.personApiBaseUrl,
-                                        withURLSeed: K.personApiURLStandardSeed,
+                                        withURLSeed: urlSeed,
                                         withURLNationality: K.personApiURLNationality,
                                         withURLExcludedFields: K.personApiURLExcludedFields,
                                         withResultCount: "100")
@@ -66,8 +73,6 @@ class PersonListViewController: UIViewController {
 
 extension PersonListViewController: PersonManagerDelegate {
     func didFetchPersons(personArray: PersonDataResults) {
-        print("Fetched updated person data from API.")
-        
         for person in personArray.results {
             let newPerson = PersonEntity(context: context)
             

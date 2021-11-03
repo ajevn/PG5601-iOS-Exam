@@ -7,9 +7,13 @@
 
 import UIKit
 import Kingfisher
+import CoreData
 
 class PersonInfoViewController: UIViewController {
     
+    var selectedPerson: PersonEntity?
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let persistenceController = PersistenceController()
     
     @IBOutlet weak var personImage: UIImageView!
     @IBOutlet weak var firstNameLabel: UILabel!
@@ -20,28 +24,89 @@ class PersonInfoViewController: UIViewController {
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var countyLabel: UILabel!
     @IBOutlet weak var postalCodeLabel: UILabel!
+    @IBOutlet weak var phoneNumberLabel: UILabel!
     
-    var selectedPerson: PersonData?
+    @IBAction func didTapDelete(_ sender: Any) {
+        deletePerson()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        //nameLabel.text = selectedPerson?.name.first
-        
-        let imageUrl = selectedPerson!.picture.large
-        personImage.kf.indicatorType = .activity
-        personImage.kf.setImage(with: URL(string: imageUrl), placeholder: .none,
-                                options: [.processor(RoundCornerImageProcessor(cornerRadius: 20)),
-                                          .transition(.fade(0.25)),])
-        
-        
-        firstNameLabel.text = selectedPerson?.name.first
-        lastNameLabel.text = selectedPerson?.name.last
-        ageLabel.text = "\(String(describing: selectedPerson!.dob.age))"
-        birthDateLabel.text = selectedPerson?.dob.date.components(separatedBy: "T")[0]
-        emailLabel.text = selectedPerson?.email
-        cityLabel.text = selectedPerson?.location.city
-        countyLabel.text = selectedPerson?.location.state
-        postalCodeLabel.text = selectedPerson?.location.postcode
+        initData()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        initData()
+    }
+    
+    func initData() {
+        let request : NSFetchRequest<PersonEntity> = PersonEntity.fetchRequest()
+        let predicate = NSPredicate(format: "id == %@", String((selectedPerson?.id)!))
+        request.predicate = predicate
+                
+        do {
+            let fetchedPerson: PersonEntity = try context.fetch(request).first!
+            
+            if let url = fetchedPerson.pictureLargeUrl {
+                personImage.kf.indicatorType = .activity
+                personImage.kf.setImage(with: URL(string: url), placeholder: .none,
+                                        options: [.processor(RoundCornerImageProcessor(cornerRadius: 20)),
+                                                  .transition(.fade(0.25)),])
+            }
+            if let firstName = fetchedPerson.firstName {
+                firstNameLabel.text = firstName
+            }
+            if let lastName = fetchedPerson.lastName {
+                lastNameLabel.text = lastName
+            }
+            ageLabel.text = String(fetchedPerson.age)
+            if let birthDate = fetchedPerson.dob {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                birthDateLabel.text = dateFormatter.string(from: birthDate)
+            }
+            if let email = fetchedPerson.email {
+                emailLabel.text = email
+            }
+            if let city = fetchedPerson.city {
+                cityLabel.text = city
+            }
+            if let county = fetchedPerson.county {
+                countyLabel.text = county
+            }
+            if let postalCode = fetchedPerson.postCode {
+                postalCodeLabel.text = postalCode
+            }
+            if let phoneNumber = fetchedPerson.phoneNumber {
+                phoneNumberLabel.text = phoneNumber
+            }
+        } catch {
+            print(error)
+        }
+        
+        
+    }
+    
+    func deletePerson() {
+        let request : NSFetchRequest<PersonEntity> = PersonEntity.fetchRequest()
+        let predicate = NSPredicate(format: "id == %@", String((selectedPerson?.id)!))
+        request.predicate = predicate
+                
+        do {
+            let fetchedPerson: PersonEntity = try context.fetch(request).first!
+            fetchedPerson.wasDeleted = true
+            
+            persistenceController.saveContext(withContext: context)
+            self.navigationController?.popViewController(animated: true)
+        } catch {
+            print(error)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? PersonEditInfoViewController {
+            destinationViewController.selectedPerson = selectedPerson
+        }
+    }
 }

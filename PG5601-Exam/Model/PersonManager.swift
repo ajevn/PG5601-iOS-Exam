@@ -13,16 +13,13 @@ protocol PersonManagerDelegate {
 }
 
 class PersonManager: Manager {
-    
-    let baseURL = "https://randomuser.me/api/"
-    let urlSeed = "seed=403f97561700da74"
-    let urlNationality = "nat=no"
-    let urlExcludedFields = "exc=login&exc=registered"
-    let resultCount = "100"
 
 
     override init() {
         super.init()
+    }
+    
+    func fetchData(withBaseURL baseURL: String,withURLSeed urlSeed: String,withURLNationality urlNationality: String,withURLExcludedFields urlExcludedFields: String,withResultCount resultCount: String) {
         var request = URLRequest(url: URL(string: "\(baseURL)?results=\(resultCount)&\(urlNationality)&\(urlExcludedFields)&\(urlSeed)")!)
         request.setValue("Content-Type", forHTTPHeaderField: "application/json")
         

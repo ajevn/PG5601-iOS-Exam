@@ -9,10 +9,9 @@ import UIKit
 
 class PersonCell: UITableViewCell {
 
-    
-    
     @IBOutlet weak var personImage: UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

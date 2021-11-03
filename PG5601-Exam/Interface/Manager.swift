@@ -29,8 +29,7 @@ class Manager {
             let decodedData = try decoder.decode(PersonDataResults.self, from: data)
             return decodedData
         } catch let jsonError as NSError {
-            //delegate?.didFailWithError(error: error)
-            print(jsonError)
+            self.personManagerDelegate?.didFailWithError(error: jsonError)
             return nil
         }
     }

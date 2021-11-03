@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,16 +25,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="samplePic" id="YJh-Yf-tam">
-                                <rect key="frame" x="234" y="6" width="71" height="65"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="samplePic" translatesAutoresizingMaskIntoConstraints="NO" id="YJh-Yf-tam">
+                                <rect key="frame" x="233" y="6" width="72" height="66"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                             </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Ctk-Ef-F3R" firstAttribute="centerY" secondItem="ZZ5-Bn-8Yg" secondAttribute="centerY" id="2ef-pK-44A"/>
                             <constraint firstItem="Ctk-Ef-F3R" firstAttribute="leading" secondItem="ZZ5-Bn-8Yg" secondAttribute="leading" constant="15" id="FMD-Ox-9hl"/>
+                            <constraint firstAttribute="trailing" secondItem="YJh-Yf-tam" secondAttribute="trailing" constant="15" id="FuV-uY-Yjc"/>
                             <constraint firstItem="Ctk-Ef-F3R" firstAttribute="centerX" secondItem="ZZ5-Bn-8Yg" secondAttribute="centerX" id="HbA-WG-AFe"/>
+                            <constraint firstAttribute="bottom" secondItem="YJh-Yf-tam" secondAttribute="bottom" constant="5" id="MGH-bz-PtX"/>
+                            <constraint firstItem="YJh-Yf-tam" firstAttribute="top" secondItem="ZZ5-Bn-8Yg" secondAttribute="top" constant="6" id="UI2-CY-TqN"/>
                             <constraint firstItem="Ctk-Ef-F3R" firstAttribute="centerX" secondItem="ZZ5-Bn-8Yg" secondAttribute="centerX" id="gjF-Ua-jgS"/>
                         </constraints>
                     </view>

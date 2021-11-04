@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		6B194C212732CE8800A237BF /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 6B194C202732CE8800A237BF /* Logging */; };
 		6B194C232732D37800A237BF /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B194C222732D37800A237BF /* TabBarViewController.swift */; };
+		6B194C25273322BD00A237BF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B194C24273322BD00A237BF /* MapViewController.swift */; };
 		6B49D79D272D7B9E00681B21 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6B49D79B272D7B9E00681B21 /* DataModel.xcdatamodeld */; };
 		6B57F6E12731B8FF00FEAD96 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B57F6E02731B8FF00FEAD96 /* SettingsViewController.swift */; };
-		6B9707A62722B4AE00321EB3 /* PersonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9707A52722B4AE00321EB3 /* PersonManager.swift */; };
+		6B9707A62722B4AE00321EB3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9707A52722B4AE00321EB3 /* NetworkManager.swift */; };
 		6B9707A92722BE0200321EB3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 6B9707A82722BE0200321EB3 /* Alamofire */; };
-		6B9707AC2726D55A00321EB3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9707AB2726D55A00321EB3 /* NetworkManager.swift */; };
 		6B9707AF2726E9E600321EB3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 6B9707AE2726E9E600321EB3 /* Kingfisher */; };
 		6B9707B12726F13A00321EB3 /* PersonInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9707B02726F13A00321EB3 /* PersonInfoViewController.swift */; };
 		6BC2E45C27216CB300048BE1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC2E45B27216CB300048BE1 /* Constants.swift */; };
@@ -52,10 +52,10 @@
 
 /* Begin PBXFileReference section */
 		6B194C222732D37800A237BF /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		6B194C24273322BD00A237BF /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		6B49D79C272D7B9E00681B21 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		6B57F6E02731B8FF00FEAD96 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		6B9707A52722B4AE00321EB3 /* PersonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonManager.swift; sourceTree = "<group>"; };
-		6B9707AB2726D55A00321EB3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		6B9707A52722B4AE00321EB3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = ../Model/NetworkManager.swift; sourceTree = "<group>"; };
 		6B9707B02726F13A00321EB3 /* PersonInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonInfoViewController.swift; sourceTree = "<group>"; };
 		6BC2E45B27216CB300048BE1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6BC2E4612721989C00048BE1 /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
@@ -106,10 +106,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B194C26273322C600A237BF /* Person */ = {
+			isa = PBXGroup;
+			children = (
+				6BEF7FF3272029EB00B83CDF /* PersonListViewController.swift */,
+				6B9707B02726F13A00321EB3 /* PersonInfoViewController.swift */,
+				6BF4C6D9272ECDD1009EDE0F /* PersonEditInfoViewController.swift */,
+			);
+			path = Person;
+			sourceTree = "<group>";
+		};
 		6B9707AA2726D54E00321EB3 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				6B9707AB2726D55A00321EB3 /* NetworkManager.swift */,
+				6B9707A52722B4AE00321EB3 /* NetworkManager.swift */,
 				6BF4C6DB272ED29F009EDE0F /* PersistenceManager.swift */,
 			);
 			path = Interface;
@@ -181,7 +191,6 @@
 			isa = PBXGroup;
 			children = (
 				6BC2E46627219C5C00048BE1 /* PersonData.swift */,
-				6B9707A52722B4AE00321EB3 /* PersonManager.swift */,
 				6B49D79B272D7B9E00681B21 /* DataModel.xcdatamodeld */,
 			);
 			path = Model;
@@ -200,11 +209,10 @@
 		6BEF802127202A6400B83CDF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				6BEF7FF3272029EB00B83CDF /* PersonListViewController.swift */,
-				6B9707B02726F13A00321EB3 /* PersonInfoViewController.swift */,
-				6BF4C6D9272ECDD1009EDE0F /* PersonEditInfoViewController.swift */,
+				6B194C26273322C600A237BF /* Person */,
 				6B57F6E02731B8FF00FEAD96 /* SettingsViewController.swift */,
 				6B194C222732D37800A237BF /* TabBarViewController.swift */,
+				6B194C24273322BD00A237BF /* MapViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -356,8 +364,7 @@
 				6BEF7FF4272029EB00B83CDF /* PersonListViewController.swift in Sources */,
 				6BF4C6DC272ED29F009EDE0F /* PersistenceManager.swift in Sources */,
 				6B194C232732D37800A237BF /* TabBarViewController.swift in Sources */,
-				6B9707A62722B4AE00321EB3 /* PersonManager.swift in Sources */,
-				6B9707AC2726D55A00321EB3 /* NetworkManager.swift in Sources */,
+				6B9707A62722B4AE00321EB3 /* NetworkManager.swift in Sources */,
 				6B9707B12726F13A00321EB3 /* PersonInfoViewController.swift in Sources */,
 				6BC2E4632721989C00048BE1 /* PersonCell.swift in Sources */,
 				6BF4C6DA272ECDD1009EDE0F /* PersonEditInfoViewController.swift in Sources */,
@@ -365,6 +372,7 @@
 				6B57F6E12731B8FF00FEAD96 /* SettingsViewController.swift in Sources */,
 				6BEF7FF2272029EB00B83CDF /* SceneDelegate.swift in Sources */,
 				6BC2E45C27216CB300048BE1 /* Constants.swift in Sources */,
+				6B194C25273322BD00A237BF /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -32,7 +32,7 @@
                             <constraint firstItem="TOd-4v-UYt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zLE-0M-kqh"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Personer" id="iKo-bw-pyt"/>
+                    <navigationItem key="navigationItem" title="Contacts" id="iKo-bw-pyt"/>
                     <connections>
                         <outlet property="personTableView" destination="TOd-4v-UYt" id="m0I-V0-xGX"/>
                         <segue destination="T98-ze-dsh" kind="show" identifier="personInfoSegue" id="b2d-Uf-kmy"/>
@@ -84,11 +84,15 @@
                                     </textField>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Adb-Wd-x3p">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aLL-et-9dd"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Adb-Wd-x3p" firstAttribute="centerX" secondItem="6YW-W2-E3c" secondAttribute="centerX" id="Ue7-qa-QRV"/>
                             <constraint firstItem="zAR-YG-lhf" firstAttribute="leading" secondItem="aLL-et-9dd" secondAttribute="leading" constant="10" id="Vbd-zK-sDO"/>
+                            <constraint firstItem="Adb-Wd-x3p" firstAttribute="centerY" secondItem="6YW-W2-E3c" secondAttribute="centerY" id="b3l-Mo-tjH"/>
                             <constraint firstItem="zAR-YG-lhf" firstAttribute="top" secondItem="aLL-et-9dd" secondAttribute="top" constant="40" id="mLc-Km-4ZA"/>
                             <constraint firstItem="aLL-et-9dd" firstAttribute="trailing" secondItem="zAR-YG-lhf" secondAttribute="trailing" constant="10" id="zHS-QK-5A2"/>
                         </constraints>
@@ -103,6 +107,7 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="Adb-Wd-x3p" id="R4e-Ip-dOe"/>
                         <outlet property="apiSeedTextField" destination="xzA-Yd-Kne" id="Hg0-Ml-LtO"/>
                     </connections>
                 </viewController>
@@ -128,17 +133,31 @@
             </objects>
             <point key="canvasLocation" x="132" y="1533"/>
         </scene>
-        <!--View Controller-->
+        <!--Map-->
         <scene sceneID="Zy9-hW-UAQ">
             <objects>
-                <viewController id="SOc-VK-gfY" sceneMemberID="viewController">
+                <viewController id="SOc-VK-gfY" customClass="MapViewController" customModule="PG5601_Exam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qk9-jM-gmh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ecP-Df-jEk">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                            </mapView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="khs-7B-jBi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="khs-7B-jBi" firstAttribute="bottom" secondItem="ecP-Df-jEk" secondAttribute="bottom" id="7JZ-e1-krF"/>
+                            <constraint firstItem="ecP-Df-jEk" firstAttribute="leading" secondItem="khs-7B-jBi" secondAttribute="leading" id="8R6-ZP-Wgf"/>
+                            <constraint firstItem="ecP-Df-jEk" firstAttribute="top" secondItem="khs-7B-jBi" secondAttribute="top" id="glb-bw-kv2"/>
+                            <constraint firstItem="khs-7B-jBi" firstAttribute="trailing" secondItem="ecP-Df-jEk" secondAttribute="trailing" id="u71-O5-ak4"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="IYv-3S-2DM"/>
+                    <navigationItem key="navigationItem" title="Map" id="IYv-3S-2DM"/>
+                    <connections>
+                        <outlet property="mapKitView" destination="ecP-Df-jEk" id="BvT-0i-Pgd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D9L-Ad-FLi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -147,7 +166,7 @@
         <!--Person Info View Controller-->
         <scene sceneID="IWP-4I-ZL4">
             <objects>
-                <viewController id="T98-ze-dsh" customClass="PersonInfoViewController" customModule="PG5601_Exam" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="personInfoViewController" id="T98-ze-dsh" customClass="PersonInfoViewController" customModule="PG5601_Exam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H2P-y7-t6k">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

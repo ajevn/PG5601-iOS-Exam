@@ -27,20 +27,25 @@ class PersonListViewController: UIViewController {
     var selectedRowIndex = 0
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let logger = Logger(label: "PersonListViewController")
+    var isLoadingData = false
     
     @IBOutlet weak var personTableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //Printing filepath to application CoreData
+        DispatchQueue.main.async {
+            self.hideSpinner()
+        }
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
         personTableView.dataSource = self
         personTableView.delegate = self
         personTableView.register(UINib(nibName: K.personListCellName, bundle: nil), forCellReuseIdentifier: K.personListCellIdentifier)
 
-        
-        
-        //Subscribing to networkManager delegate to perform actions based on success or error
+        //Subscribing to networkManager delegate to perform actions based on success or error in data retrieval
         sharedNetworkManager.networkManagerDelegate = self
     }
     
@@ -73,6 +78,9 @@ class PersonListViewController: UIViewController {
                     $0.firstName! < $1.firstName!
                 }
             } else {
+                DispatchQueue.main.async {
+                    self.showSpinner()
+                }
                 let urlSeed: String
                 if let safeUrlSeed = UserDefaults.standard.string(forKey: K.personApiSeedKey) {
                     urlSeed = safeUrlSeed
@@ -90,6 +98,15 @@ class PersonListViewController: UIViewController {
             self.personTableView.reloadData()
         }
     }
+    
+    private func showSpinner() {
+        activityIndicator.startAnimating()
+        activityIndicator.isHidden = false
+    }
+    private func hideSpinner() {
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
+    }
 }
 
 extension PersonListViewController: NetworkManagerDelegate {
@@ -104,7 +121,7 @@ extension PersonListViewController: NetworkManagerDelegate {
             if(deletedPersonIds?.contains(person.id.value) != true && editedPersonIds?.contains(person.id.value) != true){
                 let newPerson = PersonEntity(context: context)
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd" //Your date format
+                dateFormatter.dateFormat = "yyyy-MM-dd" 
                 guard let dobDate = dateFormatter.date(from: person.dob.date.components(separatedBy: "T")[0]) else {
                     logger.error("Error formatting date.")
                     return
@@ -127,7 +144,7 @@ extension PersonListViewController: NetworkManagerDelegate {
                 newPerson.phoneNumber = person.phone
                 newPerson.nationality = person.nat
                 
-                let pictureUrl = URL.init(string: person.picture.thumbnail)
+                let pictureUrl = URL.init(string: person.picture.medium)
                 if let data = try? Data(contentsOf: pictureUrl!) {
                     newPerson.pictureData = data
                 }
@@ -135,12 +152,15 @@ extension PersonListViewController: NetworkManagerDelegate {
         }
         sharedPersistenceManager.deleteAllPersons(withContext: context)
         sharedPersistenceManager.saveContext(withContext: context)
+        DispatchQueue.main.async {
+            self.hideSpinner()
+        }
         initData()
     }
     func didFailWithError(error: Error) {
-        //
         logger.error("Error fetching data: \(error)")
         DispatchQueue.main.async {
+            self.hideSpinner()
             let alert = UIAlertController(title: "Error fetching data", message: "Check your network connection and try again.", preferredStyle: .alert)
 
             alert.addAction(UIAlertAction(title: "Try Again", style: .default, handler: { action in
